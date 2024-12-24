@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safer מתחם ההטבות של</title>
+    <style>
+        :root {
+            --primary: #3f51b5;
+            --primary-light: #757de8;
+            --primary-dark: #002984;
+            --accent: #ff4081;
+            --background: #f5f7ff;
+            --text: #172554;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 3rem 1rem;
+            margin: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .category-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+
+        .category-pill {
+            background: white;
+            padding: 0.75rem 2rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-pill:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+        }
+
+        .featured-deal {
+            background: linear-gradient(135deg, #fff, #f8faff);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(63, 81, 181, 0.1);
+        }
+
+        .featured-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .timer {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .timer-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            min-width: 100px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(63, 81, 181, 0.1);
+        }
+
+        .timer-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .box {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(63, 81, 181, 0.1);
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(63, 81, 181, 0.15);
+        }
+
+        .box img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .box:hover img {
+            transform: scale(1.1);
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        #modal img {
+            max-width: 100%;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #modal form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #modal form input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #modal form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+        }
+
+        #modal button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #modal button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .banners-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .banner {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(63, 81, 181, 0.1);
+        }
+
+        .banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(63, 81, 181, 0.15);
+        }
+
+        .banner img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .banner:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .featured-deal {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .timer {
+                gap: 1rem;
+            }
+
+            .timer-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> מתחם ההטבות של Safer</h1>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">100,000+</div>
+                <div class="stat-label">משתמשים רשומים</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">הטבות פעילות</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">חנויות משתתפות</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <div class="category-pills">
+        <div class="category-pill">רכב</div>
+        <div class="category-pill">אלקטרוניקה</div>
+        <div class="category-pill">מזון</div>
+        <div class="category-pill">ספורט</div>
+        <div class="category-pill">ביגוד</div>
+        <div class="category-pill">נופש</div>
+    </div>
+
+    <!-- Featured Deal -->
+    <div class="featured-deal">
+        <div class="featured-title">דיל השבוע - חיסול סטוק ספרי קומיקס לילדים</div>
+        <p>כל ספרי הקומיקס ב 7 ש"ח</p>
+        <div class="timer">
+            <div class="timer-item">
+                <div class="timer-number">02</div>
+                <div class="timer-label">ימים</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-number">12</div>
+                <div class="timer-label">שעות</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-number">45</div>
+                <div class="timer-label">דקות</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original Boxes Grid -->
+    <div class="container">
+        <div class="box" onclick="handleBoxClick(0)"><img src="https://moadafim.co.il/wp-content/uploads/2020/09/Screen-Shot-2020-09-14-at-20.17.12.png" alt="Logo 1"></div>
+        <div class="box" onclick="handleBoxClick(1)"><img src="https://ramot-mall.co.il/wp-content/uploads/2019/12/%D7%A2%D7%99%D7%A6%D7%95%D7%91-%D7%9C%D7%9C%D7%90-%D7%A9%D7%9D-1-1.png" alt="Logo 2"></div>
+        <div class="box" onclick="handleBoxClick(2)"><img src="https://storage.bhol.co.il/articles/637205_tumb_800X480.jpg" alt="Logo 3"></div>
+        <div class="box" onclick="handleBoxClick(3)"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuNCgcoSRlzGBU0h4jAq08-o1lxQUUYzROUw&s" alt="Logo 4"></div>
+        <div class="box" onclick="handleBoxClick(4)"><img src="https://bestshay.co.il/wp-content/uploads/2024/03/%D7%9C%D7%95%D7%92%D7%95-%D7%9C%D7%91%D7%9F.jpg" alt="Logo 5"></div>
+        <div class="box" onclick="handleBoxClick(5)"><img src="https://services.b144.co.il/Utils/LogoHandler.ashx?MID=401D0D1A4370655D4D17051A42&cat=&w=100&h=100&color=GrayLogo&hasLogo=false" alt="Logo 6"></div>
+        <div class="box" onclick="handleBoxClick(6)"><img src="https://indexchazak.co.il/media/com_jbusinessdirectory/pictures/companies/272/_-______1728278212.jpeg" alt="Logo 7"></div>
+        <div class="box" onclick="handleBoxClick(7)"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRop2ac7i492_DrhOav37pyUpQyfLXOBwkkQ&s" alt="Logo 8"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal">
+        <div id="modal-content">
+            <img id="modal-img" src="" alt="Ad">
+            <form>
+                <input type="text" placeholder="שם" required>
+                <input type="tel" placeholder="טלפון" required>
+                <input type="email" placeholder="אימייל" required>
+                <button type="submit">שלח</button>
+            </form>
+            <button onclick="closeModal()">סגור</button>
+        </div>
+    </div>
+
+    <!-- Original Banners -->
+    <div class="banners-container">
+        <div class="banner">
+            <a href="https://tachshik.com/" target="_blank">
+                <img src="https://tachshik.com/wp-content/uploads/2024/03/cropped-%D7%9C%D7%95%D7%92%D7%95-2048x680.png" alt="Tachshik">
+            </a>
+        </div>
+        <div class="banner">
+            <a href="https://bagir-il.com/" target="_blank">
+                <img src="https://bagir-il.com/wp-content/uploads/2021/09/logo-black.png" alt="Bagir">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function handleBoxClick(index) {
+            const links = [
+            "https://bandm.co.il/",
+            "https://refaeli.co.il/",
+                "https://bestshay.co.il/",
+                "https://glorykids.co.il/"
+            ];
+
+            const images = [
+            "https://www.banana-fashion.co.il/wp-content/uploads/2020/08/165px_logo.png",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyWidP9nfSLEgtdSZgJbzrZh-vUA2zsZ1tKg&s",
+
+                "https://haimke.co.il/wp-content/uploads/2024/04/WhatsApp-Image-2024-03-19-at-12.32.52.jpeg",
+                "https://s3.prog.co.il/data/attachments/1299/1299896-df20e458d517ac3ef220019340601d08.jpg"
+            ];
+
+            if (index % 2 === 0) {
+                // Open a link
+                window.open(links[Math.floor(index / 2)], "_blank");
+            } else {
+                // Open modal for form
+                const modal = document.getElementById("modal");
+                const modalImg = document.getElementById("modal-img");
+                modalImg.src = images[Math.floor(index / 2)];
+                modal.style.display = "flex";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById("modal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
